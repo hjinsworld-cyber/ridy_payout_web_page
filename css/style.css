@@ -138,16 +138,122 @@ button {
    SECTION 1: Hero / 서비스 소개
    ========================================= */
 .hero {
-  background: var(--color-primary);
-  padding: 48px 0 56px;
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: 0 0 56px;
   color: white;
   position: relative;
   overflow: hidden;
 }
 
+
 @media (min-width: 1024px) {
   .hero {
-    padding: 80px 0 88px;
+    padding: 0 0 88px;
+  }
+}
+
+/* Hero Collage */
+.hero-collage {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  margin-bottom: 0;
+}
+
+.hero-collage-item {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-collage-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-collage-left {
+  left: 0;
+  width: 55%;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}
+
+.hero-collage-right {
+  right: 0;
+  width: 55%;
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.hero-collage-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.15) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-collage-logo {
+  position: absolute;
+  bottom: 20px;
+  left: clamp(16px, 4vw, 40px);
+  height: clamp(36px, 5vw, 56px);
+  width: auto;
+  z-index: 3;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* Glass card for hero content */
+.hero > .container {
+  position: relative;
+  z-index: 3;
+  margin-top: -48px;
+  background: rgba(64, 84, 231, 0.65);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: 24px 24px 0 0;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@media (min-width: 1024px) {
+  .hero-collage {
+    height: 420px;
+    margin-bottom: 0;
+  }
+
+  .hero-collage-logo {
+    bottom: 60px;
+    left: 48px;
+    height: 64px;
+  }
+
+  .hero > .container {
+    margin-top: -60px;
+    padding-top: 48px;
+    border-radius: 32px 32px 0 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-collage {
+    height: 220px;
+    margin-bottom: 0;
+  }
+
+  .hero-collage-logo {
+    bottom: 14px;
+    left: 16px;
+    height: 28px;
+  }
+
+  .hero > .container {
+    margin-top: -36px;
+    padding-top: 28px;
+    border-radius: 20px 20px 0 0;
   }
 }
 
@@ -202,6 +308,7 @@ button {
     padding: 20px;
   }
 }
+
 
 /* Tab Switcher */
 .tab-switcher {
@@ -271,6 +378,36 @@ button {
   font-weight: 700;
 }
 
+
+/* =========================================
+   주요 기능 소개 타이틀
+   ========================================= */
+.features-intro {
+  background: var(--color-white);
+  padding: var(--section-py) 0 0;
+}
+
+.features-intro .section-headline {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.inline-logo {
+  height: 1.4em;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  filter: brightness(0) saturate(100%) invert(27%) sepia(82%) saturate(2156%) hue-rotate(228deg) brightness(92%) contrast(95%);
+}
+
+.features-intro .section-subcopy {
+  text-align: center;
+  margin: 0 auto;
+}
 
 /* =========================================
    SECTION 2: 주요 기능 — 관리자
@@ -847,43 +984,117 @@ button {
 
 .pricing .section-subcopy {
   text-align: center;
-  margin: 0 auto 40px;
+  margin: 0 auto 24px;
 }
 
-/* Pricing Table */
-.pricing-table-wrapper {
-  overflow-x: auto;
-  margin-bottom: 32px;
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
+@media (min-width: 768px) {
+  .pricing .section-subcopy {
+    margin: 0 auto 40px;
+  }
 }
 
-.pricing-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  min-width: 600px;
+/* Pricing Plan Cards */
+.pricing-plan-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.pricing-table th,
-.pricing-table td {
-  padding: 20px;
-  text-align: center;
+@media (min-width: 768px) {
+  .pricing-plan-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+}
+
+.pricing-plan-card {
+  background: var(--color-white);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.pricing-plan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.pricing-plan-header {
+  padding: 20px 20px 16px;
   border-bottom: 1px solid var(--color-border);
 }
 
-.pricing-table th {
-  background: #F9FAFB;
-  font-weight: 600;
-  color: var(--color-text-primary);
+@media (min-width: 768px) {
+  .pricing-plan-header {
+    padding: 24px 28px 20px;
+  }
 }
 
-.pricing-table td {
+.pricing-plan-header .payer-badge {
+  margin-bottom: 8px;
+}
+
+.pricing-plan-name {
+  font-size: var(--text-h3);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.pricing-plan-desc {
+  font-size: var(--text-small);
   color: var(--color-text-secondary);
+  line-height: 1.5;
 }
 
-.pricing-table td strong {
-  color: var(--color-text-primary);
+.pricing-plan-body {
+  padding: 16px 20px 20px;
+}
+
+@media (min-width: 768px) {
+  .pricing-plan-body {
+    padding: 20px 28px 24px;
+  }
+}
+
+.pricing-plan-original {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pricing-plan-label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  min-width: 52px;
+}
+
+.pricing-plan-promo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.pricing-plan-price-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pricing-plan-unit {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  font-weight: 500;
 }
 
 /* Tiered Price Styling */
@@ -962,68 +1173,6 @@ button {
   color: #D97706;
 }
 
-/* Mobile: pricing cards instead of table */
-@media (max-width: 767px) {
-  .pricing-table-wrapper {
-    display: none;
-  }
-}
-
-.pricing-cards-mobile {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .pricing-cards-mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-}
-
-.pricing-card-mobile {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  box-shadow: var(--shadow-card);
-}
-
-.pricing-card-mobile-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
-}
-
-.pricing-card-mobile .service-name {
-  font-weight: 600;
-  font-size: var(--text-h3);
-  color: var(--color-text-primary);
-}
-
-.pricing-card-desc {
-  font-size: var(--text-small);
-  color: var(--color-text-secondary);
-  margin-bottom: 14px;
-  line-height: 1.5;
-}
-
-.pricing-card-price-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.pricing-card-price-row:last-child {
-  margin-bottom: 0;
-}
-
-.pricing-arrow {
-  color: var(--color-text-secondary);
-  font-size: 14px;
-}
 
 /* Tiered Divider */
 .tiered-divider {
@@ -1033,9 +1182,15 @@ button {
   background: #EFF6FF;
   border: 1px dashed #93C5FD;
   border-radius: 6px;
-  padding: 4px 10px;
-  margin: 6px 0;
+  padding: 4px 8px;
+  margin: 8px 0;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .tiered-divider {
+    padding: 4px 10px;
+  }
 }
 
 /* Tiered Highlight Box */
@@ -1043,12 +1198,19 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   background: linear-gradient(135deg, #EEF0FF, #DBEAFE);
   border: 1.5px solid var(--color-primary-light);
   border-radius: var(--radius-sm);
-  padding: 10px 16px;
+  padding: 8px 12px;
   margin-top: 4px;
+}
+
+@media (min-width: 768px) {
+  .tiered-highlight-box {
+    gap: 8px;
+    padding: 10px 16px;
+  }
 }
 
 .price-promo-highlight {
@@ -1213,15 +1375,50 @@ button {
   font-weight: 700;
 }
 
-.type-card .recommend-tag {
+/* Type Diff Badge */
+.type-diff-badge {
+  display: inline-block;
   font-size: var(--text-small);
-  color: var(--color-text-secondary);
-  padding: 10px 0 0;
-  border-top: 1px solid var(--color-border);
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
 }
 
-.type-card .recommend-tag strong {
+.type-diff-no {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+.type-diff-yes {
+  background: #FEF3C7;
+  color: #D97706;
+  border: 1px solid #FDE68A;
+}
+
+/* Recommend Box */
+.recommend-box {
+  background: var(--color-icon-bg);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border-left: 3px solid var(--color-primary);
+}
+
+.recommend-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--color-primary);
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
+.recommend-box p {
+  font-size: var(--text-small);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .type-card .type-cta-link {
