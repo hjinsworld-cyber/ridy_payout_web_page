@@ -196,16 +196,6 @@ button {
   z-index: 2;
 }
 
-.hero-collage-logo {
-  position: absolute;
-  bottom: 20px;
-  left: clamp(16px, 4vw, 40px);
-  height: clamp(36px, 5vw, 56px);
-  width: auto;
-  z-index: 3;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-}
-
 /* Glass card for hero content */
 .hero > .container {
   position: relative;
@@ -225,12 +215,6 @@ button {
     margin-bottom: 0;
   }
 
-  .hero-collage-logo {
-    bottom: 60px;
-    left: 48px;
-    height: 64px;
-  }
-
   .hero > .container {
     margin-top: -60px;
     padding-top: 48px;
@@ -242,12 +226,6 @@ button {
   .hero-collage {
     height: 220px;
     margin-bottom: 0;
-  }
-
-  .hero-collage-logo {
-    bottom: 14px;
-    left: 16px;
-    height: 28px;
   }
 
   .hero > .container {
